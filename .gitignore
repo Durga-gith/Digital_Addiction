@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+ml-venv/
+ml-venv-tf/
+.env
+
+# ML models (large files)
+ml_models/saved_models/
+
+# OS
+.DS_Store
+
+# Node / frontend
+node_modules/
+
+# Logs
+*.log
+

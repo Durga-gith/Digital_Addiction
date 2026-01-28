@@ -1,0 +1,8 @@
+﻿question,answer,category,confidence,language,tags
+Hello,"👋 Hello! I'm your Digital Wellness Assistant. I can help you understand assessment results, reduce screen time, manage digital stress, and improve your digital wellbeing. What would you like to know today?",greeting,1,en,"hello,hi,greetings"
+Hi,"Hi there! Ready to improve your digital habits? Ask me about assessment results, screen time tips, stress management, or digital detox strategies.",greeting,1,en,"hi,hey"
+Help,I can help with: 📊 Assessment results explanation ⏰ Screen time reduction 🧘 Digital stress management 🌱 Digital detox planning 📈 Future predictions 📱 App recommendations What specific area interests you?,help,1,en,"help,support,assist"
+Thank you,You're welcome! 😊 Remember to practice healthy digital habits and check your progress regularly. Come back anytime you need guidance on digital wellness.,farewell,1,en,"thanks,thank_you"
+Bye,Goodbye! 👋 Don't forget to take regular screen breaks and practice digital mindfulness. Your wellbeing matters!,farewell,1,en,"bye,goodbye,see_you"
+Bonjour,"👋 Bonjour! Je suis votre Assistant de Bien-être Numérique. Je peux vous aider à comprendre vos résultats d'évaluation, réduire le temps d'écran, gérer le stress numérique et améliorer votre bien-être numérique. Que voudriez-vous savoir aujourd'hui?",greeting,1,fr,"bonjour,salut"
+Merci,De rien! 😊 N'oubliez pas de pratiquer des habitudes numériques saines et de vérifier vos progrès régulièrement. Revenez quand vous avez besoin de conseils sur le bien-être numérique.,farewell,1,fr,merci
