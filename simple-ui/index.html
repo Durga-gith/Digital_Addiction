@@ -2690,9 +2690,16 @@
         
         let focusInterval = null;
         let focusRemaining = 0;
-        let focusTotal = 0;
-        
+        let focusTotal = 0;   
+
         function startFocusTimer() {
+            const alarm = document.getElementById('focusAlarm');
+            if (alarm) {
+                alarm.play().then(() => {
+                    alarm.pause();
+                    alarm.currentTime = 0;
+                }).catch(() => {});
+            }
             const mins = parseInt(document.getElementById('focusDuration').value || '25', 10);
             focusTotal = mins * 60;
             if (focusRemaining <= 0 || focusRemaining > focusTotal) focusRemaining = focusTotal;
@@ -2702,6 +2709,9 @@
                 if (focusRemaining <= 0) {
                     clearInterval(focusInterval);
                     focusInterval = null;
+                    focusRemaining = 0;
+                    updateFocusUI();
+                    playFocusAlarm(); 
                     incrementFocusSessions();
                 }
                 updateFocusUI();
@@ -2715,6 +2725,13 @@
                 focusInterval = null;
             }
         }
+        function incrementFocusSessions() {
+            const el = document.getElementById('focusSessions');
+            if (!el) return;
+            let count = parseInt(el.textContent || '0', 10);
+            el.textContent = count + 1;
+        }
+
         
         function resetFocusTimer() {
             const mins = parseInt(document.getElementById('focusDuration').value || '25', 10);
@@ -2724,7 +2741,27 @@
                 clearInterval(focusInterval);
                 focusInterval = null;
             }
+            const alarm = document.getElementById('focusAlarm');
+            if (alarm) {
+                alarm.pause();
+                alarm.currentTime = 0;
+            }
             updateFocusUI();
+        }
+        function playFocusAlarm() {
+            const alarm = document.getElementById('focusAlarm');
+            if (alarm) {
+                alarm.currentTime = 0;
+                alarm.play().catch(err => {
+                    console.warn("Autoplay blocked:", err);
+                });
+            }
+            showNotification(
+                currentLanguage === 'fr'
+                ? 'Temps écoulé ! Faites une pause 🧘‍♀️'
+                : 'Time’s up! Take a break 🧘‍♂️',
+                'success'
+            );
         }
         
         function updateFocusUI() {
@@ -5474,6 +5511,7 @@
             }, 100);
         }
 
+
         // --- HEALTH ASSESSMENT FUNCTIONS ---
 
         async function runHealthAssessment() {
@@ -5533,8 +5571,12 @@
             } finally {
                 if (btn) {
                     btn.disabled = false;
-                    const btnText = document.getElementById('healthBtnText').innerText; 
-                    btn.innerHTML = `<i class="fas fa-heartbeat me-2"></i>${btnText}`;
+                    btn.innerHTML = `
+                        <i class="fas fa-heartbeat me-2"></i>
+                        <span id="healthBtnText">
+                            ${currentLanguage === 'fr' ? 'Obtenir l\'évaluation de santé' : 'Get Health Assessment'}
+                        </span>
+                    `;
                 }
             }
         }
@@ -5904,6 +5946,10 @@
                 completeVoiceAssessment();
             }
         };
+
     </script>
+    <audio id="focusAlarm" preload="auto">
+        <source src="assets/alarm.WAV" type="audio/wav">
+    </audio>
 </body>
 </html>
