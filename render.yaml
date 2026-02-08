@@ -20,7 +20,7 @@ services:
       - key: FRONTEND_URL
         value: "*"
       - key: PYTHON_VERSION
-        value: 3.9.0
+        value: 3.11.0
 
 databases:
   - name: digital-addiction-db
