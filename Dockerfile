@@ -6,8 +6,6 @@ WORKDIR /app
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
     gcc \
     postgresql-client \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
