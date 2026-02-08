@@ -101,11 +101,16 @@ app.include_router(auth_router)
 
 @app.get("/api/health")
 def health_check(db: Session = Depends(get_db)):
-    db.execute(text("SELECT 1"))
+    db_ok = True
+    try:
+        db.execute(text("SELECT 1"))
+    except Exception:
+        db_ok = False
     return {
-        "status": "healthy",
+        "status": "healthy" if db_ok else "degraded",
         "timestamp": datetime.utcnow().isoformat(),
-        "environment": settings.ENVIRONMENT
+        "environment": settings.ENVIRONMENT,
+        "database": "ok" if db_ok else "error"
     }
 
 # -------------------------------------------------------------------
