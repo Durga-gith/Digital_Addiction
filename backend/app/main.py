@@ -123,7 +123,8 @@ def video_assessment(
     try:
         try:
             from ml_models.inference.video_inference import predict_emotion  # lazy import to avoid heavy deps at import time
-        except Exception:
+        except Exception as e:
+            print(f"WARNING: Failed to import video_inference: {e}")
             def predict_emotion(frame):
                 return "neutral", "NORMAL"
         data_url = payload.image
