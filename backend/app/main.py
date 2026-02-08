@@ -85,6 +85,9 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 FRONTEND_DIR = os.path.join(BASE_DIR, "simple-ui")
 if os.path.isdir(FRONTEND_DIR):
     app.mount("/ui", StaticFiles(directory=FRONTEND_DIR, html=True), name="ui")
+    @app.get("/ui")
+    def ui_index():
+        return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 # -------------------------------------------------------------------
 # Auth
