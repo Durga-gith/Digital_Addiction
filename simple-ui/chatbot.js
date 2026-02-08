@@ -1,6 +1,8 @@
 class SimpleChatbot {
     constructor() {
-        this.apiBase = 'http://localhost:8000'; 
+        const defaultBase = window.location.origin;
+        const envBase = window.API_BASE || defaultBase;
+        this.apiBase = envBase;
         this.currentLanguage = 'en';
         this.isVoiceActive = false;
         this.speechRecognition = null;
