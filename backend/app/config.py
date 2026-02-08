@@ -10,7 +10,7 @@ load_dotenv(ENV_PATH)
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
+    DATABASE_URL: str = "sqlite:///./test.db"  # Default for build/test, overridden in prod
 
     @validator("DATABASE_URL", pre=True)
     def fix_postgres_url(cls, v: str):
@@ -18,12 +18,12 @@ class Settings(BaseSettings):
             return v.replace("postgres://", "postgresql://", 1)
         return v
 
-    SECRET_KEY: str
-    ALGORITHM: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    SECRET_KEY: str = "default_insecure_secret_key"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
-    FRONTEND_URL: str
-    ENVIRONMENT: str
+    FRONTEND_URL: str = "*"
+    ENVIRONMENT: str = "development"
 
     class Config:
         case_sensitive = True
