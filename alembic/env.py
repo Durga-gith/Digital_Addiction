@@ -5,12 +5,12 @@ from logging.config import fileConfig
 from sqlalchemy import pool
 from alembic import context
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "backend"))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, BASE_DIR)
 
-from app.database import Base
-from app.config import settings
-from app.models import *  # IMPORTANT
+from backend.app.database import Base
+from backend.app.config import settings
+from backend.app.models import *  # IMPORTANT
 
 config = context.config
 
