@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from jose import jwt
 
@@ -28,13 +27,13 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=schemas.Token)
 def login(
-    form_data: OAuth2PasswordRequestForm = Depends(),
+    payload: schemas.UserLogin,
     db: Session = Depends(get_db)
 ):
     user = crud.authenticate_user(
         db,
-        username=form_data.username,
-        password=form_data.password
+        username=payload.username,
+        password=payload.password
     )
 
     if not user:
